@@ -11,9 +11,9 @@ public class QuickSort {
 	
 	static int[] numbers;
 
-	public static void main(String[] args) 
+	void setFile(String name)
     {
-        String fileName = "random_10k.txt";
+        String fileName = name;
         
 
         try 
@@ -24,23 +24,19 @@ public class QuickSort {
         {
             System.out.println("An error occurred: " + e.getMessage());
         }
-        
-        start();
-        
+             
     }
 
+     
     
-    
-    
-    static void start()
+    void QuickSortMain()
     {
     	quicksort(numbers, 0, numbers.length - 1);
-    	
-    	
-    	printArray(numbers);
     }
     
-    private static void printArray(int[] numbers) {
+    
+    @SuppressWarnings("unused")
+	private static void printArray(int[] numbers) {
         for (int number : numbers) {
             System.out.print(number + " ");
         }
