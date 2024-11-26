@@ -2,11 +2,9 @@ package bmt;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Shell {
 
@@ -45,7 +43,7 @@ public class Shell {
     return numberList.stream().mapToInt(Integer::intValue).toArray();
   }
 
-  public static void main(String[] args) {
+  public void ShellMain() {
     int[] arr = new int[0];
     String fileName = "random_10k.txt";
 
@@ -61,8 +59,8 @@ public class Shell {
 
     sort(arr);
 
-    System.out.println("Array after sorting");
-    printArray(arr);
+    // System.out.println("Array after sorting");
+    // printArray(arr);
   }
 
 }

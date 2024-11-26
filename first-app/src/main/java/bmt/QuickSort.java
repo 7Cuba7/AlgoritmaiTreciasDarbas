@@ -7,152 +7,101 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuickSort {
-	
-	
-	static int[] numbers;
 
-	public static void main(String[] args) 
-    {
+    static int[] numbers;
+
+    public void QuickSortMain() {
         String fileName = "random_10k.txt";
-        
 
-        try 
-        {
-           numbers = readNumbersFromFile(fileName);
-        } 
-        catch (IOException e) 
-        {
+        try {
+            numbers = readNumbersFromFile(fileName);
+        } catch (IOException e) {
             System.out.println("An error occurred: " + e.getMessage());
         }
-        
+
         start();
-        
+
     }
 
-    
-    
-    
-    static void start()
-    {
-    	quicksort(numbers, 0, numbers.length - 1);
-    	
-    	
-    	printArray(numbers);
+    static void start() {
+        quicksort(numbers, 0, numbers.length - 1);
+
+        // printArray(numbers);
     }
-    
+
     private static void printArray(int[] numbers) {
         for (int number : numbers) {
             System.out.print(number + " ");
         }
         System.out.println();
     }
-    
-    
-    private static void quicksort(int[] array, int lowIndex, int highIndex) 
-    {
-        if (lowIndex >= highIndex) 
-        {
+
+    private static void quicksort(int[] array, int lowIndex, int highIndex) {
+        if (lowIndex >= highIndex) {
             return;
         }
 
         int pivotIndex = partition(array, lowIndex, highIndex);
-        
+
         quicksort(array, lowIndex, pivotIndex - 1);
         quicksort(array, pivotIndex + 1, highIndex);
     }
 
-    
-    
-    
-    private static int partition(int[] array, int lowIndex, int highIndex) 
-    {
-        
+    private static int partition(int[] array, int lowIndex, int highIndex) {
+
         int midIndex = lowIndex + (highIndex - lowIndex) / 2;
         int pivotIndex = medianOfThree(array, lowIndex, midIndex, highIndex);
 
-      
         swap(array, pivotIndex, highIndex);
-        int pivotValue = array[highIndex]; 
+        int pivotValue = array[highIndex];
 
         int leftPointer = lowIndex;
 
-        
-        for (int i = lowIndex; i < highIndex; i++) 
-        {
-            
-            if (array[i] < pivotValue) 
-            {
+        for (int i = lowIndex; i < highIndex; i++) {
+
+            if (array[i] < pivotValue) {
                 swap(array, i, leftPointer);
                 leftPointer++;
             }
         }
 
-       
         swap(array, leftPointer, highIndex);
-        return leftPointer; 
-        
+        return leftPointer;
+
     }
 
-    
-    
-    private static int medianOfThree(int[] array, int low, int mid, int high) 
-    {
+    private static int medianOfThree(int[] array, int low, int mid, int high) {
         int a = array[low];
         int b = array[mid];
         int c = array[high];
 
-       
-        if ((a > b) == (a < c)) 
-        {
+        if ((a > b) == (a < c)) {
             return low;
-        } 
-        else if ((b > a) == (b < c)) 
-        {
+        } else if ((b > a) == (b < c)) {
             return mid;
-        } 
-        else 
-        {
+        } else {
             return high;
         }
-        
-    }
-    
 
-    
-    
-    
-    private static void swap(int[] array, int index1, int index2) 
-    {
+    }
+
+    private static void swap(int[] array, int index1, int index2) {
         int temp = array[index1];
         array[index1] = array[index2];
         array[index2] = temp;
     }
 
-   
-    
-    
-    private static int[] readNumbersFromFile(String fileName) throws IOException 
-    {
+    private static int[] readNumbersFromFile(String fileName) throws IOException {
         List<Integer> numberList = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) 
-        {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
-            while ((line = reader.readLine()) != null) 
-            {
+            while ((line = reader.readLine()) != null) {
                 numberList.add(Integer.parseInt(line.trim()));
             }
         }
 
-      
         return numberList.stream().mapToInt(Integer::intValue).toArray();
     }
 
-
-
-
-    
-    
-    
-    
 }
